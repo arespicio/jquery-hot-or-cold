@@ -1,16 +1,19 @@
 
+
 $(document).ready(function(){
 
+  initalNum();
+  
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
 
   	});
-
   	/*--- Hide information modal box ---*/
   	$("a.close").click(function(){
   		$(".overlay").fadeOut(1000);
   	});
+
 
     $("#guessButton").click(function() {
       handleGuessButtonClick();
@@ -26,53 +29,60 @@ $(document).ready(function(){
 
 });
 
+//global variables
+var target;
+var guess;
+
 function handleGuessButtonClick() {
-  var number = $('#userGuess').val();
-  var guess = + number;
+  var guess = +$('#userGuess').val();
   $('#guessList').append("<li>" + guess + "</li>");
   $('#userGuess').val('');
+  $('#count').html(function(i, val) { return val*1+1 });
+
+  guessComp();
+}
+
+//generating the number
+function initalNum(){
+  target = Math.floor((Math.random() * 100) + 1);
+  alert(target);
 }
 
 function newGame() {
-  var target = Math.floor((Math.random() * 100) + 1);
   $('#userGuess').val('');
   $('#guessList').empty();
+  $('#count').html('0');
+
+  initalNum();
 }
 
-function guess() {
-  var diff = (target - guess);
+function message(text) {
+  $('#feedback').replaceWith(text);
+}
 
-	if( diff >= 50){
-  		 	$('#feedback').replaceWith(function() {
-  		 		return "<h2>You are an ice cube!</h2>";
-  		 	});
-  		} else if( diff <= 30){
-  			$('#feedback').replaceWith(function() {
-  				return "<h2>You are slowly melting!</h2>";
-  			});
-  		} else if( diff > 20){
-  			$('#feedback').replaceWith(function() {
-  				return "<h2>You are slowly melting!</h2>";
-  			});
-		} else if( diff <= 20){
-  			$('#feedback').replaceWith(function() {
-  				return "<h2>You are a puddle of water!</h2>";
-  			});
-  		} else if( diff > 10){
-  			$('#feedback').replaceWith(function() {
-  				return "<h2>You are a puddle of water!</h2>";
-  			});
-  		} else if( diff <= 10){
-  			$('#feedback').replaceWith(function() {
-  				return "<h2>You are boiling water!</h2>";
-  			});
-  		} else if( diff >= 1){
-  			$('#feedback').replaceWith(function() {
-  				return "<h2>You are boiling water!</h2>";
-  			});
-  		} else if (guess === target){
-  			$('#feedback').replaceWith("YOU WIN!");
-  		}
+function guessComp(text) {
+  var diff = Math.abs(guess - target);
+  if( guess > target || guess < target){
+	   if( diff >= 50 ){
+  		 		message("You are an ice cold....brrrrrr!");
+  		} 
+      else if( diff >= 30){
+  				message("It's feeling chilly in here!");
+  		} 
+      else if( diff >= 20){
+  				message("You are lukewarm!");
+  		} 
+      else if( diff >= 10){
+  				message("Feeling warm!");
+  		} 
+      else( diff > 0){
+  				message("Wow, it's burning up in here!");
+  		};
+  } 
+  else{
+          message("YOU WIN!");
+      };
+  }
 }
 
 
