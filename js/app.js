@@ -1,6 +1,10 @@
 
 $(document).ready(function(){
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 209c990e47738728b5a7e870f496e9ac69125bf2
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
@@ -12,6 +16,7 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
+<<<<<<< HEAD
     $("#guessButton").click(function() {
       handleGuessButtonClick();
     });
@@ -81,4 +86,8 @@ function guess() {
 
 
 
+=======
+});
+
+>>>>>>> 209c990e47738728b5a7e870f496e9ac69125bf2
 
