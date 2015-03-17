@@ -1,5 +1,4 @@
 
-
 $(document).ready(function(){
 
   initalNum();
@@ -52,40 +51,35 @@ function newGame() {
   $('#userGuess').val('');
   $('#guessList').empty();
   $('#count').html('0');
+  $('#feedback').html('Make your Guess!');
 
   initalNum();
 }
 
-function message(text) {
-  $('#feedback').replaceWith(text);
-}
-
-function guessComp(text) {
-  var diff = Math.abs(guess - target);
-  if( guess > target || guess < target){
-	   if( diff >= 50 ){
-  		 		message("You are an ice cold....brrrrrr!");
-  		} 
-      else if( diff >= 30){
-  				message("It's feeling chilly in here!");
-  		} 
-      else if( diff >= 20){
-  				message("You are lukewarm!");
-  		} 
-      else if( diff >= 10){
-  				message("Feeling warm!");
-  		} 
-      else( diff > 0){
-  				message("Wow, it's burning up in here!");
-  		};
-  } 
-  else{
-          message("YOU WIN!");
-      };
+function guessComp() {
+  var guessCheck = Math.abs(guess - target);
+  var guess = +$('#userGuess').val();
+  	   if (guessCheck >= 50){
+    		 		$('#feedback').text("You are ice cold....brrrrrr!");
+            alert("You are ice cold....brrrrrr!");
+    		} else if (guessCheck >= 30) {
+    				$('#feedback').text("It's feeling chilly in here!");
+            alert("It's feeling chilly in here!");
+    		} else if(guessCheck >= 20) {
+    				$('#feedback').text("You are lukewarm!");
+            alert("You are lukewarm!");
+    		} else if(guessCheck >= 10) {
+    				$('#feedback').text("Feeling warm!");
+            alert("Feeling warm!");
+        } else if (guessCheck === 0) {
+            $('#feedback').text("YOU WIN!");
+            alert("YOU WIN!");
+    		} else {
+    				$('#feedback').text("Wow, it's burning up in here!");
+            alert("Wow, it's burning up in here!");
+    		};
   }
-}
 
-});
 
 
 
