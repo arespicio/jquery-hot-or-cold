@@ -1,9 +1,16 @@
 
 
 $(document).ready(function(){
+<<<<<<< HEAD
 
+<<<<<<< HEAD
   initalNum();
   
+=======
+=======
+	
+>>>>>>> 209c990e47738728b5a7e870f496e9ac69125bf2
+>>>>>>> 50ff13e6c4e6b2455446e16815fad0cd7b5ef9f1
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
@@ -14,7 +21,11 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+>>>>>>> 50ff13e6c4e6b2455446e16815fad0cd7b5ef9f1
     $("#guessButton").click(function() {
       handleGuessButtonClick();
     });
@@ -91,4 +102,8 @@ function guessComp(text) {
 
 
 
+=======
+});
+
+>>>>>>> 209c990e47738728b5a7e870f496e9ac69125bf2
 
