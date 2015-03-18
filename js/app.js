@@ -40,9 +40,12 @@ var prevdiff = -1;
 
 function handleGuessButtonClick() {
   var guess = +$('#userGuess').val();
-    if (guess == '') {
-      alert('Please enter a whole number')
-    } return;
+    if (guess==null || guess=="")
+      {
+      alert("Please Fill Required Field");
+      return false;
+      }
+    
   $('#guessList').append("<li>" + guess + "</li>");
   $('#userGuess').val('');
   $('#count').html(function(i, val) { return val*1+1 });
@@ -74,9 +77,9 @@ function guessComp(aGuess) {
   var hint = '';
       if (diff != 0 && prevdiff != -1) {
         if (prevdiff < diff) {
-          hint = ' Colder';
+          hint = " You're getting colder!";
         } else if (prevdiff > diff) {
-          hint = ' Warmer';
+          hint = " You're getting warmer!";
         }
       }
 
