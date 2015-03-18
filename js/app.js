@@ -14,6 +14,12 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
+    $('#guessButton').keyup(function(event){
+    if(event.keyCode == 13) {
+      $('#guessButton').click();
+    };
+  });
+
     $("#guessButton").click(function() {
       handleGuessButtonClick();
     });
@@ -30,53 +36,63 @@ $(document).ready(function(){
 
 //global variables
 var target;
-var guess;
+var prevdiff = -1;
 
 function handleGuessButtonClick() {
   var guess = +$('#userGuess').val();
+    if (guess == '') {
+      alert('Please enter a whole number')
+    } return;
   $('#guessList').append("<li>" + guess + "</li>");
   $('#userGuess').val('');
   $('#count').html(function(i, val) { return val*1+1 });
-
-  guessComp();
+    
+  guessComp(guess);
 }
+
 
 //generating the number
 function initalNum(){
   target = Math.floor((Math.random() * 100) + 1);
-  alert(target);
 }
+
 
 function newGame() {
   $('#userGuess').val('');
   $('#guessList').empty();
   $('#count').html('0');
   $('#feedback').html('Make your Guess!');
+  prevdiff = -1;
 
   initalNum();
 }
 
-function guessComp() {
-  var guessCheck = Math.abs(guess - target);
-  var guess = +$('#userGuess').val();
-  	   if (guessCheck >= 50){
-    		 		$('#feedback').text("You are ice cold....brrrrrr!");
-            alert("You are ice cold....brrrrrr!");
-    		} else if (guessCheck >= 30) {
-    				$('#feedback').text("It's feeling chilly in here!");
-            alert("It's feeling chilly in here!");
-    		} else if(guessCheck >= 20) {
-    				$('#feedback').text("You are lukewarm!");
-            alert("You are lukewarm!");
-    		} else if(guessCheck >= 10) {
-    				$('#feedback').text("Feeling warm!");
-            alert("Feeling warm!");
-        } else if (guessCheck === 0) {
-            $('#feedback').text("YOU WIN!");
-            alert("YOU WIN!");
+function guessComp(aGuess) {
+  var diff = Math.abs(aGuess - target);
+
+      //determine whether current guess is warmer or colder
+  var hint = '';
+      if (diff != 0 && prevdiff != -1) {
+        if (prevdiff < diff) {
+          hint = ' Colder';
+        } else if (prevdiff > diff) {
+          hint = ' Warmer';
+        }
+      }
+
+  prevdiff = diff;
+  	   if (diff >= 50){
+    		 		$('#feedback').text("You are ice cold....brrrrrr!" + hint);
+    		} else if (diff >= 30) {
+    				$('#feedback').text("It's feeling chilly in here!" + hint);
+    		} else if(diff >= 20) {
+    				$('#feedback').text("You are lukewarm!" + hint);
+    		} else if(diff >= 10) {
+    				$('#feedback').text("Feeling warm!" + hint);
+        } else if (diff >= 1) {
+            $('#feedback').text("Wow, it's burning up in here!" + hint);
     		} else {
-    				$('#feedback').text("Wow, it's burning up in here!");
-            alert("Wow, it's burning up in here!");
+            $('#feedback').text("YOU WIN!");
     		};
   }
 
