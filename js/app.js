@@ -40,10 +40,13 @@ var prevdiff = -1;
 
 function handleGuessButtonClick() {
   var guess = +$('#userGuess').val();
-    if (guess==null || guess=="")
-      {
-      alert("Please Fill Required Field");
+    if (guess==null || guess=="") {
+      alert("Please Fill Required Field with a Whole Number");
       return false;
+      } else if (isNaN(guess)){
+        alert("Please Fill Required Field with a Whole Number");
+        $('#userGuess').val('');
+        return false;
       }
     
   $('#guessList').append("<li>" + guess + "</li>");
